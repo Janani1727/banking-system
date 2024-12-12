@@ -41,7 +41,17 @@ userRouter.post("/login",async(req,res)=>{
       }
 
     try {
-        const user=await UserModel.find({email})
+    
+        const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(400).send({ message: "Email is not registered" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(400).send({ message: "Incorrect password" });
+    }
 
         if(user.length>0){
             bcrypt.compare(password,user[0].password,function(err,result){
