@@ -11,17 +11,18 @@ userRouter.post("/register", async (req, res) => {
   if (!name || !email || !password || !confirmPassword) {
     return res.status(400).send({ message: "All fields are required" });
   }
-  if(password.length<=6){
-    return res.status(400).send({ message: "password should be more than 6 characters" });
+  if (password.length <= 6) {
+    return res
+      .status(400)
+      .send({ message: "password should be more than 6 characters" });
   }
   if (password !== confirmPassword) {
     return res.status(400).send({ message: "Passwords do not match" });
   }
   try {
-
-    const exisitingUser= await UserModel.findOne({email})
-    if(exisitingUser){
-        return res.send({ message: "user already registered! please Login" });
+    const exisitingUser = await UserModel.findOne({ email });
+    if (exisitingUser) {
+      return res.send({ message: "user already registered! please Login" });
     }
     const hashed = await bcrypt.hash(password, 10);
     const user = new UserModel({ name, email, password: hashed });
@@ -32,39 +33,31 @@ userRouter.post("/register", async (req, res) => {
   }
 });
 
+userRouter.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({ message: "All fields are required" });
+  }
 
-userRouter.post("/login",async(req,res)=>{
-    const {email,password}=req.body
-
-    if ( !email || !password ) {
-        return res.status(400).send({ message: "All fields are required" });
-      }
-
-    try {
-    
-        const user = await UserModel.findOne({ email });
+  try {
+    const user = await UserModel.findOne({ email });
+    console.log(user)
     if (!user) {
       return res.status(400).send({ message: "Email is not registered" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log("req.body", isPasswordValid);
 
     if (!isPasswordValid) {
       return res.status(400).send({ message: "Incorrect password" });
     }
 
-        if(user.length>0){
-            bcrypt.compare(password,user[0].password,function(err,result){
-                if(result){
-                    let token=jwt.sign({userId:user[0]._id},"bank")
-                    res.send({"msg":"login success","token":token})
-                }
-            })
-        }
-    } catch (err) {
-        res.send(err.message)
-    }
-})
+    let token = jwt.sign({ userId: user._id }, "bank");
+    res.send({ msg: "login success", token: token });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
 
 module.exports = { userRouter };
-
