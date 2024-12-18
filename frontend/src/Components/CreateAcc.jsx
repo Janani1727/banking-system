@@ -77,8 +77,8 @@ const CreateAcc = () => {
     }
     
 
-const decodedToken = jwt.decode(token);
-console.log(decodedToken);
+// const decodedToken = jwt.decode(token);
+// console.log(decodedToken);
 
   
     // Use fetch to send data with the token in the Authorization header
