@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const accountSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+  userId: { type:  mongoose.Schema.Types.ObjectId, ref: 'user' },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   phone: { type: Number, required: true },
@@ -21,7 +21,7 @@ const accountSchema = new mongoose.Schema({
       return Math.floor(10000000000 + Math.random() * 90000000000).toString();
     },
   },
-  accType: {
+  atype: {
     type: String,
     enum: ["Savings", "Current"],
     required: true,

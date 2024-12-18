@@ -15,7 +15,7 @@ accRouter.post("/createAcc",verifyToken,async (req, res) => {
     gender,
     address,
     accNum,
-    accType,
+    atype,
     pan,
     aadhar,
   } = req.body;
@@ -23,6 +23,7 @@ accRouter.post("/createAcc",verifyToken,async (req, res) => {
 
   
   const userId = req.userId;
+  console.log(userId,"janani")
   try {
    
     const newAccount = new AccountModel({
@@ -34,7 +35,7 @@ accRouter.post("/createAcc",verifyToken,async (req, res) => {
       gender,
       address,
       accNum,
-      accType,  
+      atype,  
       pan,
       aadhar,
     });
@@ -50,4 +51,21 @@ accRouter.post("/createAcc",verifyToken,async (req, res) => {
   }
 });
 
+accRouter.get("/specificUser/:id",async (req,res) => {
+  try {
+    let userId = req.params.id; 
+    let specificUser = await AccountModel.find({ userId }); 
+
+    if (!specificUser) {
+      return res.status(404).json({ message: "Account not found" });
+    }
+
+    res.send(specificUser);
+  } catch (error) {
+    res.send({ message: "Server Error", error: error.message });
+  }
+})
+
 module.exports = { accRouter };
+
+
