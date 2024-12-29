@@ -24,7 +24,7 @@ const accountSchema = new mongoose.Schema({
   atype: {
     type: String,
     enum: ["Savings", "Current"],
-    required: true,
+    
   },
   pan: { type: String, required: true },
   aadhar: { type: Number, required: true },
