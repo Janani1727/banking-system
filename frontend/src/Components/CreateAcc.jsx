@@ -15,7 +15,7 @@ const CreateAcc = () => {
     city: "",
     state: "",
     pinCode: "",
-    accType: "",
+    atype: "",
     pan: "",
     aadhar: "",
   });
@@ -60,7 +60,7 @@ const CreateAcc = () => {
         pinCode,  // Including the formatted PIN code
       },
       accNum: formData.accNum,  // If you have this value
-      accType: formData.accType,  // Ensuring this field is properly mapped
+      atype: formData.atype,  // Ensuring this field is properly mapped
       pan: panNumber,  // Include the full PAN number
       aadhar: aadharNumber,  // Include the full Aadhar number
     };
@@ -268,17 +268,17 @@ const CreateAcc = () => {
               </div>
             </div>
   
-            {/* Account Type Dropdown */}
             <div className="form-group">
-              <label htmlFor="accType">Account Type</label>
+              <label htmlFor="AccountType">Account Type</label>
               <select
-                id="accType"
-                value={formData.accType} // Bind value to accType
+                id="atype"
+                value={formData.gender}
                 onChange={handleChange}
               >
                 <option value="">Select</option>
                 <option value="Savings">Savings</option>
                 <option value="Current">Current</option>
+                
               </select>
             </div>
   
