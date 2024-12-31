@@ -1,0 +1,104 @@
+.loan-form-container {
+ width: 70%;
+   margin-top: 8%;
+  margin-left: 25%; 
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 500px;
+
+  border: 1px solid black;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form container for two columns */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px;
+  grid-template-areas: 
+    "left-column right-column";
+}
+
+/* Left column styling */
+.form-section:first-child {
+  grid-area: left-column;
+}
+
+/* Right column styling */
+.form-section:nth-child(2) {
+  grid-area: right-column;
+}
+
+/* Style for input groups */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-group select {
+  cursor: pointer;
+}
+
+button.submit-btn {
+  grid-column: span 2; /* Button spans across both columns */
+  /* padding: 12px; */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 250px;
+  margin-left: 30%;
+  margin-top: 10px;
+}
+
+button.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Consent checkbox styling */
+.consent-group {
+  grid-column: span 2; /* Consent spans across both columns */
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.consent-group input {
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  /* Stack columns on smaller screens */
+  form {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "left-column" 
+      "right-column";
+  }
+
+  button.submit-btn {
+    width: 100%;
+  }
+}

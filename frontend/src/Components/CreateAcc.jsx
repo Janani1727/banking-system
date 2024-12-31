@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import "./CreateAcc.css"; // Assuming a CSS file for styles
 
@@ -403,10 +405,11 @@ const CreateAcc = () => {
         </div>
   
         {/* Submit Button */}
-        <button type="submit" className="submit-button">
+        
+      </form>
+      <button type="submit" className="submit-button">
           Submit
         </button>
-      </form>
     </div>
   );
   
