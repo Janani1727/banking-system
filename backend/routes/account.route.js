@@ -26,6 +26,10 @@ accRouter.post("/createAcc",verifyToken,async (req, res) => {
   console.log(userId,"janani")
   try {
    
+    const existingAccount = await AccountModel.findOne({ userId });
+    if (existingAccount) {
+      return res.status(400).send({ message: "Account already exists for this user" });
+    }
     const newAccount = new AccountModel({
       userId,  
       firstName,
