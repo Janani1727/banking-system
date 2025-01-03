@@ -2,21 +2,10 @@ import React,{useState} from "react";
 import "./Sidebar.css";
 import { IoNotifications } from "react-icons/io5";
 import { Link, Route, Routes } from "react-router-dom"; 
-import Transactions from "./Transactions"; 
-import Withdrawl from "./Withdrawl";
-import Deposit from "./Deposit"; 
-import Update from "./Update";
-import DashBoard from "./DashBoard";
-import LoanReq from "./LoanReq";
 import { useNavigate } from "react-router-dom";  
 
-const Sidebar = () => {
-  const data = [
-    { name: "Deposit", value: 5000 },
-    { name: "Withdrawal", value: 8000 },
-  ];
-
-  const COLORS = ["#0088FE", "#FF8042"];
+const Sidebar = ({balance}) => {
+ 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -26,8 +15,7 @@ const Sidebar = () => {
   };
 
   const handleLogoutConfirm = () => {
-    // Perform the logout logic here (clear session, tokens, etc.)
-    // Redirect to the registration route
+   
     navigate("/register");
   };
 
@@ -51,7 +39,7 @@ const Sidebar = () => {
           </div>
           <div className="account-balance">
             <h3>
-              Your account balance: <span>5000</span>
+              Your account balance: <span>{balance}</span>
             </h3>
             <p className="notification-icon">
               <IoNotifications size={22} />
